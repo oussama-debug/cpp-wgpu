@@ -31,3 +31,13 @@ add_subdirectory(webgpu)
 
 target_link_libraries(myengine PRIVATE webgpu)
 target_copy_webgpu_binaries(myengine)
+
+if (EMSCRIPTEN)
+    # Add Emscripten-specific link options
+    target_link_options(myengine PRIVATE
+        -sUSE_GLFW=3 # Use Emscripten-provided GLFW
+        -sUSE_WEBGPU # Handle WebGPU symbols
+        -sASYNCIFY # Required by WebGPU-C++
+    )
+    set_target_properties(myengine PROPERTIES SUFFIX ".html")
+endif()

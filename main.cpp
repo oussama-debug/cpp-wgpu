@@ -14,5 +14,7 @@ int main (int, char**) {
  
     std::cout << "WGPU instance: " << instance << std::endl;
 
+    wgpuInstanceRelease(instance);
+
     return 0;
 }
